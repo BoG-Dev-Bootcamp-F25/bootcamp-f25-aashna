@@ -1,7 +1,7 @@
 # Exercise 6 - Poké API
 
 ## Video Link:
-https://github.com/BoG-Dev-Bootcamp-F25/bootcamp-f25-aashna.git
+https://youtu.be/PsHj9BiwGWk
 
 ## Description
 
