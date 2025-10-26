@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ name: string }> }
@@ -37,7 +43,7 @@ export async function GET(
     const pokemonData = {
       name: data.name,
       sprite: data.sprites.front_default,
-      type: data.types.map((type: any) => type.type.name)
+      type: data.types.map((type: PokemonType) => type.type.name)
     };
     
     return NextResponse.json(pokemonData, { status: 200 });

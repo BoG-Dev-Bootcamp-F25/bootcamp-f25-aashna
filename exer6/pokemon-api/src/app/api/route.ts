@@ -1,6 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
+export async function GET() {
   try {
     // Get total number of Pokemon (there are 1010 Pokemon in the API)
     const totalPokemon = 1010;
@@ -21,7 +27,7 @@ export async function GET(request: NextRequest) {
     const pokemonData = {
       name: data.name,
       sprite: data.sprites.front_default,
-      type: data.types.map((type: any) => type.type.name)
+      type: data.types.map((type: PokemonType) => type.type.name)
     };
     
     return NextResponse.json(pokemonData, { status: 200 });

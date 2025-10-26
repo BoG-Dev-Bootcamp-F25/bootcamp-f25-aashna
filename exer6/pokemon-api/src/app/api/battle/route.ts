@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface PokemonStat {
+  base_stat: number;
+}
+
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -38,8 +48,8 @@ export async function POST(request: NextRequest) {
     }
     
     // Calculate base stat totals for both Pokemon
-    const pokemon1Stats = pokemon1Data.stats.reduce((total: number, stat: any) => total + stat.base_stat, 0);
-    const pokemon2Stats = pokemon2Data.stats.reduce((total: number, stat: any) => total + stat.base_stat, 0);
+    const pokemon1Stats = pokemon1Data.stats.reduce((total: number, stat: PokemonStat) => total + stat.base_stat, 0);
+    const pokemon2Stats = pokemon2Data.stats.reduce((total: number, stat: PokemonStat) => total + stat.base_stat, 0);
     
     // Determine the winner
     let winner;
@@ -47,14 +57,14 @@ export async function POST(request: NextRequest) {
       winner = {
         name: pokemon1Data.name,
         sprite: pokemon1Data.sprites.front_default,
-        type: pokemon1Data.types.map((type: any) => type.type.name),
+        type: pokemon1Data.types.map((type: PokemonType) => type.type.name),
         totalStats: pokemon1Stats
       };
     } else if (pokemon2Stats > pokemon1Stats) {
       winner = {
         name: pokemon2Data.name,
         sprite: pokemon2Data.sprites.front_default,
-        type: pokemon2Data.types.map((type: any) => type.type.name),
+        type: pokemon2Data.types.map((type: PokemonType) => type.type.name),
         totalStats: pokemon2Stats
       };
     } else {
@@ -64,13 +74,13 @@ export async function POST(request: NextRequest) {
         pokemon1: {
           name: pokemon1Data.name,
           sprite: pokemon1Data.sprites.front_default,
-          type: pokemon1Data.types.map((type: any) => type.type.name),
+          type: pokemon1Data.types.map((type: PokemonType) => type.type.name),
           totalStats: pokemon1Stats
         },
         pokemon2: {
           name: pokemon2Data.name,
           sprite: pokemon2Data.sprites.front_default,
-          type: pokemon2Data.types.map((type: any) => type.type.name),
+          type: pokemon2Data.types.map((type: PokemonType) => type.type.name),
           totalStats: pokemon2Stats
         }
       };

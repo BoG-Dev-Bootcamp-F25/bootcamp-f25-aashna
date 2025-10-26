@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface EvolutionChain {
+  species: {
+    name: string;
+  };
+  evolves_to: EvolutionChain[];
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ name: string }> }
@@ -45,7 +52,7 @@ export async function GET(
     }
     
     // Find the current Pokemon in the evolution chain and get the next evolution
-    function findNextEvolution(chain: any, targetName: string): string | null {
+    function findNextEvolution(chain: EvolutionChain, targetName: string): string | null {
       if (chain.species.name === targetName) {
         // Found the current Pokemon, return the first evolution if it exists
         return chain.evolves_to.length > 0 ? chain.evolves_to[0].species.name : targetName;

@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface PokemonEntry {
+  pokemon: {
+    name: string;
+  };
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ type: string }> }
@@ -34,7 +40,7 @@ export async function GET(
     }
     
     // Extract Pokemon names from the type data
-    const pokemonList = data.pokemon.map((pokemon: any) => pokemon.pokemon.name);
+    const pokemonList = data.pokemon.map((pokemon: PokemonEntry) => pokemon.pokemon.name);
     
     return NextResponse.json(pokemonList, { status: 200 });
   } catch (error) {
