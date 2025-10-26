@@ -1,5 +1,8 @@
 # Exercise 6 - Poké API
 
+## Video Link:
+https://github.com/BoG-Dev-Bootcamp-F25/bootcamp-f25-aashna.git
+
 ## Description
 
 In this exercise, bootcampers will familiarize themselves with Next.js, API Endpoints, and Dynamic Routing.
